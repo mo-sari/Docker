@@ -66,18 +66,19 @@ app.get("/people", async (req, res) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 });
-app.listen(3000);
-// mongoose.connect(
-//   'mongodb://localhost:27017/swfavorites',
-//   { useNewUrlParser: true },
-//   (err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       app.listen(3000);
-//     }
-//   }
-// );
 
+mongoose.connect(
+  "mongodb://host.docker.internal:27017/swfavorites",
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(3000);
+    }
+  }
+);
+
+// this would work if I had mongodb installed on my computer.
 // docker build -t request-img .
 // docker run -p 3000:3000 -d --name request-ctn request-img
