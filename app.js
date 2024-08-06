@@ -68,7 +68,7 @@ app.get("/people", async (req, res) => {
 });
 
 mongoose.connect(
-  "mongodb://172.17.0.2:27017/swfavorites",
+  "mongodb://mongodb:27017/swfavorites",
   { useNewUrlParser: true },
   (err) => {
     if (err) {
@@ -79,6 +79,12 @@ mongoose.connect(
   }
 );
 
-// this would work if I had mongodb installed on my computer.
-// docker build -t request-img .
-// docker run -p 3000:3000 -d --name request-ctn request-img
+// create the network
+// you're connecting a container to another container, so the connecting
+// container must have the name of the second(goal) container(above we added
+// mongodb to where request-ctn will try to connect to it)
+// create all container's with --network tag(first create the container which
+// the other container will talk to)
+// two containers are talking to eachother, so we don't need to expose any internal
+// port's so the container's could talk to each other, but we still need to expose a
+// port to be able to talk to the nodejs from the outside(-p 3000:3000)
