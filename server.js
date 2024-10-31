@@ -44,3 +44,5 @@ app.post('/store-goal', (req, res) => {
 });
 
 app.listen(80);
+
+// just visit the notes on attached or detached containers.
