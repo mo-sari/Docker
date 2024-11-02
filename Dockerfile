@@ -10,11 +10,10 @@ COPY . .
 
 EXPOSE 80
 
-VOLUME [ "/app/feedback" ]
-
 CMD [ "node","server.js" ]
 
-# added a volume that was supposed to copy and keep the file's created in our special
-# directory inside the container(/app/feedback) in a directory on our host machine,
-# so we would'nt loose the file's in the container got deleted, but it's still not 
-# working, why? we'll see.
+# docker volume ls ===> we have only one volume which is anonymous
+# now if we run this command :
+    # docker run -d -p 3000:80 --name feedback-ctn --rm -v feedback:/app/feedback feedback
+# we create a named volume which accomplishes the exact thing we were looking for
+# now again go : docker volume ls
