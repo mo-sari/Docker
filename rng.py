@@ -8,3 +8,6 @@ if(number2 < number1):
 else:
     random_number = randint(number1, number2)
     print(random_number)
+
+
+# go through the rest of chapter one's notes
