@@ -66,20 +66,25 @@ app.get('/people', async (req, res) => {
     res.status(500).json({ message: 'Something went wrong.' });
   }
 });
-app.listen(3000);
-// mongoose.connect(
-//   'mongodb://localhost:27017/swfavorites',
-//   { useNewUrlParser: true },
-//   (err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       app.listen(3000);
-//     }
-//   }
-// );
 
-// for communicating from a container to www we don't need any specific configuration's
-// it just works the same way as before,
-// for communicating from a container to like a database on your computer, you need to
-// change the localhost in address to "host.docker.internal"
+mongoose.connect(
+  'mongodb://mongodb:27017/swfavorites',
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(3000);
+    }
+  }
+);
+
+// containers communicating to each other:
+// first solution ===> 
+  // look it up in the notebook. ( docker run -d --name mongodb mongo)
+// second solution ===>
+  // docker network create <name>
+  // docker run -d --name mongodb --network <the_network_name> mongo
+  // put the name of the database container in the address which our sourceCode needs
+  // docker build -t network .
+  // docker run -d --rm --name network-ctn -p 3000:3000 --network the_network network
