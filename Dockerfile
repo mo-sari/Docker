@@ -10,10 +10,12 @@ COPY . .
 
 EXPOSE 80
 
+VOLUME [ "/app/node_modules" ]
+
 CMD [ "node","server.js" ]
 
-# docker volume ls ===> we have only one volume which is anonymous
-# now if we run this command :
-    # docker run -d -p 3000:80 --name feedback-ctn --rm -v feedback:/app/feedback feedback
-# we create a named volume which accomplishes the exact thing we were looking for
-# now again go : docker volume ls
+# when we bind mount, we lose some stuff like node_modules because we override
+# the content of the /app directory in our container with the files and folders 
+# in our project directory, to prevent that we create another volume( an anonymous one)
+# and tell docker to copy the node_modules to that volume and leave it alone( do not override it
+# with the bind mount)
