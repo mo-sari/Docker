@@ -1,0 +1,50 @@
+we dockerize this app in three different ways:
+
+    1- to see each container, a system running host machine (container to host machine)
+    2- to connect containers together without network (container to container)
+    3- to connect containers together with network
+
+    in all three ways we have to create and image for each part and a container based on that image
+    but the way we run those images and create containers vary
+
+    1- run the public mongo image and expose a port for it as well: 
+    ### docker run -d --rm --name mongodb -p 27017:27017 mongo
+    then add "host.docker.internal" to the address which api is using to find the database on host machine
+    ### docker build -t app-back-img .
+    ### docker run -d --name app-back-ctn -p 80:80 app-back-img
+    since i wasn't able to dockerize the react app i just installed it localy
+
+    (if we had not dockerized the api and only the database was in a container we could
+    have localhost instead of host.docker.internal since database container is exposing a port)
+
+    2- run the public mongo image without a port: 
+    ### docker run -d --rm --name mongodb mongo
+    then add mongodb's APIAdrress to the address which api is using to find the database on host machine
+    ### docker build -t app-back-img .
+    ### docker run -d --name app-back-ctn -p 80:80 app-back-img
+    since i wasn't able to dockerize the react app i just installed it localy
+
+    3- run the public mongo image without a port with a network: 
+    ### docker network create <network_name>
+    ### docker run -d --rm --name mongodb --network <network_name> mongo
+    then add mongodb as the name of contaienr to the address which api is
+    using to find the database on host machine
+    ### docker build -t app-back-img .
+    ### docker run -d --name app-back-ctn -p 80:80 --network <network_name> app-back-img
+    since i wasn't able to dockerize the react app i just installed it localy 
+
+
+    for dockerizing the whole app:
+    1- add -it to the run command, otherwise the container would shut down immidiately
+    2- we create a network, run mongo again without a port but with specifying the network.
+    in api file, add the mongo db name for address, build it again and run with specifying
+    the network.
+    the for react app change all the url's from localhost to backend app containers name, build
+    it again and this time in addition to specifying the network you will have to expose a port
+    since we are interacting with the app on our local machine's browser. ( this still won't work
+    since react code does not get executed inside the contaienr but on the browser)
+    the real solution is:
+        - for mongo put it in the network, do need to expos a port
+        - for api, put in in the network, expose a port for react
+        - for react, no need for network, expos a port to interact 
+        with the app on the browser
