@@ -11,9 +11,9 @@ services:
     # or using a file :
     env_file:
       - ./env/mongo.env
-  backend:
+  # backend:
 
-  frontend:
+  # frontend:
 
 volumes:
   data:

@@ -1,4 +1,5 @@
-docker compose notes:
-- don't need to provide -d or --rm ==> rm happens by default in docker compose and -d we would provide while running the docker compose file
-- docker compose creates a network by default and adds services to that
-network but if you wanted you could create you own network and use it
+docker-compose up ===> we can also add -d for detach mode
+this command createa a network, create volumes specified and runs the services
+### docker-compose down :
+    shut's down and removes the container, also deletes the network, doesn't remove
+    the volumes, if that was needed ==> docker-compose down -v
