@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   mongodb:
+    container_name: mongodb
     image: 'mongo'
     volumes:
       - data:/data/db
@@ -12,6 +13,7 @@ services:
     env_file:
       - ./env/mongo.env
   backend:
+    container_name: app-back-ctn
     # if you want docker-compose to build the image for you
     build: ./backend
     # ||
@@ -35,6 +37,7 @@ services:
     depends_on:
       - mongodb
   frontend:
+    container_name: app-front-ctn
     image: 'app-front-img'
     ports:
       - '3000:3000'
