@@ -1,3 +1,0 @@
-if we want to reflect changes in front end immediatly:
-docker run -d --name app-front-ctn -p 3000:3000 --rm -v /c/Users/Mohcen/Desktop/Docker/frontend/src:/app/src app-front-img
-(we have to take other step's that I did not at this point, there is pdf for them in this section's folder)
