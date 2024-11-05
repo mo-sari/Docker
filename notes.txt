@@ -1,10 +1,9 @@
-if we delete the database container, we lose previous data, to persist data we can:
-    ### docker run -d --name mongodb --network app-net -v data:data/db/ mongo
-    we're actually using a names volume to persist data even if we delete our db container
-another concern is the security of our database, and we don't want everyone to be able to connect to it
-first we must declare username and password's for our database in docker run command:
-    ### docker run -d --name mongodb --network app-net -v data:data/db/  -e MONGO_INIDB_ROOT_USERNAME=mosari307 -e MONGO_INITDB_ROOT_PASSWORD=aaa???123A mongo
-then we would have to inform our database container of these information while we are try
-to connect to the database in our api code
-    ### 'mongodb://mosari307:aaa???123A@mongodb:27017/course-goals?authSource=admin'
-    (since I had ?'s in my password I have to change it like I have in app.js)
+if we want to persist data in our logs folder in api and also have live
+sourceCode changes, we can run the below command( if our api is in nodejs
+we need also other configurations for nodemon which I didnt implement here)
+
+docker run -d --name app-back-ctn --rm --network app-net -p 80:80 \
+-v logs:/app/logs/ \
+-v /c/Users/Mohcen/Desktop/Docker/backend:/app \
+-v /app/node_modules \
+app-back-img
