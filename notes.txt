@@ -1,9 +1,3 @@
-if we want to persist data in our logs folder in api and also have live
-sourceCode changes, we can run the below command( if our api is in nodejs
-we need also other configurations for nodemon which I didnt implement here)
-
-docker run -d --name app-back-ctn --rm --network app-net -p 80:80 \
--v logs:/app/logs/ \
--v /c/Users/Mohcen/Desktop/Docker/backend:/app \
--v /app/node_modules \
-app-back-img
+if we want to reflect changes in front end immediatly:
+docker run -d --name app-front-ctn -p 3000:3000 --rm -v /c/Users/Mohcen/Desktop/Docker/frontend/src:/app/src app-front-img
+(we have to take other step's that I did not at this point, there is pdf for them in this section's folder)
