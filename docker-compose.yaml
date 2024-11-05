@@ -34,7 +34,16 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
-  # frontend:
+  frontend:
+    image: 'app-front-img'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
 
 
 # we must specify named volumes here only, not anonymous volumes or bindMounts
