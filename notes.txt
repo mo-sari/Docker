@@ -1,0 +1,4 @@
+docker compose notes:
+- don't need to provide -d or --rm ==> rm happens by default in docker compose and -d we would provide while running the docker compose file
+- docker compose creates a network by default and adds services to that
+network but if you wanted you could create you own network and use it

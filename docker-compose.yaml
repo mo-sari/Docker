@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    # for environment variables we can either add them right here:
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=mosari307
+    #   - MONGO_INITDB_ROOT_PASSWORD=aaa???123A
+    # or using a file :
+    env_file:
+      - ./env/mongo.env
+  backend:
+
+  frontend:
+
+volumes:
+  data:
