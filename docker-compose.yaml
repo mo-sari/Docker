@@ -11,9 +11,33 @@ services:
     # or using a file :
     env_file:
       - ./env/mongo.env
-  # backend:
-
+  backend:
+    # if you want docker-compose to build the image for you
+    build: ./backend
+    # ||
+    # build: 
+    #   context: ./backend
+    #   dockerfile: dockerfile
+    #   here you can specify arguments
+    #   args:
+    #     - some_arg=value
+    # 
+    # else if ==> you have the built image and you just want d-compose to use it:
+    # image: 'app-back-img'
+    ports:
+      - '80:80'
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
   # frontend:
 
+
+# we must specify named volumes here only, not anonymous volumes or bindMounts
 volumes:
   data:
+  logs:
